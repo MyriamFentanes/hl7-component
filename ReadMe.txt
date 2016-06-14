@@ -1,4 +1,4 @@
-Camel Router Spring Project
+Camel HL7 Data Transformation Tooling project
 ===========================
 
 To build this project use
