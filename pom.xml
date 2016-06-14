@@ -7,7 +7,7 @@
 	<groupId>com.redhat.partners.prototypes</groupId>
 	<artifactId>hl7-component</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.7</version>
+	<version>1.10</version>
 
 	<name>A Camel Spring Route</name>
 	<url>http://www.myorganization.org</url>
@@ -189,7 +189,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>hl7Component</Bundle-SymbolicName>
-						<Private-Package>com.redhat.partners.*</Private-Package>
+						<Private-Package>com.redhat.partners.*,ca.uhn.hl7v2.model.*</Private-Package>
 						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>

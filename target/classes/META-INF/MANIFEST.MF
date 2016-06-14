@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1465921590944
+Build-Jdk: 1.8.0_65
+Built-By: mfentane
+Bundle-ManifestVersion: 2
+Bundle-Name: A Camel Spring Route
+Bundle-SymbolicName: hl7Component
+Bundle-Version: 1.10.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.redhat.partners.prototypes.hl7.component;uses:="ca.u
+ hn.hl7v2";version="1.10.0",org.jboss.tools.fuse.transformation.editor.f
+ unction;version="1.10.0"
+Import-Package: ca.uhn.hl7v2,ca.uhn.hl7v2.parser,ca.uhn.hl7v2.util,ca.uh
+ n.hl7v2.util.idgenerator,ca.uhn.hl7v2.validation,org.apache.camel.compo
+ nent.file;version="[2.15,3)",org.apache.camel.component.hl7;version="[2
+ .15,3)",org.slf4j;version="[1.7,2)"
+Tool: Bnd-1.50.0

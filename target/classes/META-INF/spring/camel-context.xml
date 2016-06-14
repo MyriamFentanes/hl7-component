@@ -19,25 +19,26 @@
 	<bean id="hl7AckGenerator" class="com.redhat.partners.prototypes.hl7.component.AckGenerator"/>
 	<bean id="enricherHL7" class="com.redhat.partners.prototypes.hl7.component.HL7Enricher"/>
 
-  <camelContext xmlns="http://camel.apache.org/schema/spring">
+  <!-- <bean ref="enricherHL7"/> --><camelContext xmlns="http://camel.apache.org/schema/spring">
   <endpoint uri="dozer:hapi_hl7?sourceModel=ca.uhn.hl7v2.model.v24.message.ADT_A01&amp;targetModel=ca.uhn.hl7v2.model.v23.message.ADT_A01&amp;mappingFile=hapi_hl7_transformation.xml" id="hapi_hl7"/>
-  <route customId="true" id="hl7TcpRoute">
+  <endpoint uri="dozer:ADT_version?sourceModel=ca.uhn.hl7v2.model.v24.message.ADT_A01&amp;targetModel=ca.uhn.hl7v2.model.v21.message.ADT_A01&amp;mappingFile=ADT_version_transformation.xml" id="ADT_version"/>
+  <route id="hl7TcpRoute">
     <from uri="mina2:tcp://localhost:8888?sync=true&amp;codec=#hl7codec"/>
     <to uri="direct:hl7Direct"/>
   </route>
-  <route customId="true" id="hl7FileRoute">
+  <route id="hl7FileRoute">
     <from uri="file:///Users/mfentane/Documents/products/fuse/data/demos?delete=true&amp;moveFailed=.error&amp;filter=#hl7FileFilter"/>
     <convertBodyTo type="java.lang.String"/>
     <to uri="direct:hl7Direct"/>
   </route>
-  <route customId="true" id="hl7DirectRoute">
+  <route id="hl7DirectRoute">
     <from uri="direct:hl7Direct"/>
     <log message="HL7 Request: ${body}"/>
     <unmarshal>
       <hl7 validate="true"/>
     </unmarshal>
-    <bean ref="enricherHL7"/>
-    <log message="HL7 Message after marshaling: ${body}"/>
+    <to ref="ADT_version"/>
+    <log message="HL7 Message after transformation ${body}"/>
     <bean ref="hl7AckGenerator"/>
     <marshal>
       <hl7 validate="true"/>
